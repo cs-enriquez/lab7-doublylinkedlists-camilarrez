@@ -1,31 +1,79 @@
 	#include "StudentList.h"
 
 	// Define a constructor to initialize the list. The list starts with no Students
-    StudentList::StudentList() {}
+    StudentList::StudentList() {
+		head = nullptr;
+		tail = nullptr;
+		numStudents = 0;
+	}
 
 	// return the number of students currently in the list
 	int StudentList::listSize() {
-		return -1;
+		return numStudents;
 	}
 
 	//add a Node with a student to the front (head) of the list.
-	void StudentList::addFront(Student s) {}
+	void StudentList::addFront(Student s) {
+		Node *newStudent = new Node(s,head, nullptr)
+		if(head != nullptr){ //if head is not empty
+			head -> prev = newStudent;
+		}else {
+			tail = newStudent;
+		}
+		head = newStudent;
+		numStudents++;
+	}
+}
 
 	//add a Node with a student to the back (tail) of the list.
 	void StudentList::addBack(Student s) {}
 
 	//Print out the names of each student in the list.
-	void StudentList::printList() {}
+	void StudentList::printList() {
+		Node *current = head;
+		while(current != nullptr){
+			cout << current->data.name << endl;
+			current = current -> next;
+		}
+	}
 
 	// Remove the Node with the student at the back (tail) of the list
 	// should not fail if list is empty! Print an error message if this occurs
 	// Don't forget that your head and tail pointers will be null pointers if the list is empty
-	void StudentList::popBack() {}
+	void StudentList::popBack() {
+		if(tail == nullptr){
+			cout << "List is empty" << endl;
+			return;
+		}
+		Node *temp = tail;
+		tail = tail -> next; // tail points to node before
+		if(tail != nullptr){
+			tail = tail -> nullptr;
+		}else{
+			head = head -> nullptr;
+		}
+		delete temp;
+		numStudents--;
+	}
 
 	// Remove the Node with the student at the front (head) of the list
 	// should not fail if list is empty! Print an error message if this occurs
 	// Don't forget that your head and tail pointers will be null pointers if the list is empty
-	void StudentList::popFront() {}
+	void StudentList::popFront() {
+		if(tail == nullptr){
+			cout << "List is empty" << endl;
+			return;
+		}
+		Node *temp = tail;
+		tail = tail -> next; // tail points to node before
+		if(tail != nullptr){
+			tail = tail -> nullptr;
+		}else{
+			head = head -> nullptr;
+		}
+		delete temp;
+		numStudents--;
+	}
 
 	//insert a student at the position "index".
 	// for this list, count head as index 0
