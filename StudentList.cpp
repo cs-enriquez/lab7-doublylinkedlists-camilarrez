@@ -15,20 +15,31 @@
 	//add a Node with a student to the front (head) of the list.
 	void StudentList::addFront(Student s) {
 		Node *newStudent = new Node(s);
-			//head <==> tail
-			newStudent -> next = head; //head becomes second from newStudent// newStudent ==> head
-			head ->prev = newStudent; // head points to previous Node which is newStudent <== head
-			head = newStudent; //new Node becomes new head
+		//If list is empty
+		if(head == nullptr){
+			head = newStudent; //point both to new node
+			tail = newStudent;
+		}else{
+			newStudent->next = head; // Node's nest is head node
+			head->prev = newStudent; // Node's previous is new node
+			head = newStudent; //new node is now new head
+		}
 		numStudents++;
 	}
 
 
 	//add a Node with a student to the back (tail) of the list.
 	void StudentList::addBack(Student s) {
-		Node *newStudent = new Node(s);
-		newStudent -> prev = tail; //previous node to newStudent is tail // tail <==newStudent
-		tail -> next = newStudent; // next node from tail is newStudent // tail ==> newStudent
-		tail = newStudent; // newStudent is new tail;
+		Node *newStudent =  new Node(s);
+		//if list is empty
+		if(tail ==  nullptr){ 
+			head = newStudent;
+			tail = newStudent;
+		}else{
+		newStudent->prev = tail;
+		tail-> next =  newStudent;
+		tail = newStudent; //new node is now tail
+		}
 		numStudents++;
 	}
 
@@ -36,7 +47,7 @@
 	void StudentList::printList() {
 		Node *current = head; //current node will start at head node
 		while(current != nullptr){//while current node is not empty
-			// cout << current-> << endl;
+			cout << current->data.name << endl; //access student data from Node class and then access name from student class
 			current = current -> next; //moves current node to next node 
 		}
 	}
@@ -47,30 +58,27 @@
 	void StudentList::popBack() {
 		if(tail == nullptr){
 			cout << "List is empty" << endl;
-			head = nullptr;
-			tail = nullptr;
-		}else{
-			Node *temp = tail;
-			tail = tail -> prev; //tail is assigned to node before original tail
-			tail -> next = nullptr;
-			delete temp;
-		}
-		numStudents--;
+			return;
+	}if(tail == head){ // there is only one element in list
+		head = nullptr;
+		tail = nullptr;
+	}
+	
+	else{
+		Node *temp = tail;//point new node to tail
+		tail = tail->prev; //Set prev node to new tail
+		tail-> next = nullptr;// point new tail's next node to null
+		temp = nullptr;
+		delete temp;//delete temp with old tail
+
+	}
 	}
 
 	// Remove the Node with the student at the front (head) of the list
 	// should not fail if list is empty! Print an error message if this occurs
 	// Don't forget that your head and tail pointers will be null pointers if the list is empty
 	void StudentList::popFront() {
-		if(head == nullptr){
-			cout << "List is empty" << endl;
-			tail = nullptr;
-			head = nullptr;
-		}else{
-			Node *temp = head;
-			
-
-		}
+		
 	}
 
 	//insert a student at the position "index".
