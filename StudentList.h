@@ -31,6 +31,7 @@ class Node {
 		}
 };
 
+
 class StudentList {
 	private:
 		Node *head;
